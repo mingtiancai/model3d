@@ -7,7 +7,7 @@ class CYLINDER_EXPORT Cylinder
 {
 public:
     Cylinder();
-    void show();
+    void show(int argc, char **argv);
 };
 
 #endif // CYLINDER_H

@@ -13,13 +13,40 @@
 
 #include <array>
 
+#include <QApplication>
+#include <vtkGenericOpenGLRenderWindow.h>
+#include <vtkSphereSource.h>
+#include <vtkVersion.h>
+
+#if VTK_VERSION_NUMBER >= 89000000000ULL
+#define VTK890 1
+#endif
+
+#include <QSurfaceFormat>
+#include <QVTKOpenGLNativeWidget.h>
+
 Cylinder::Cylinder()
 {
 }
 
-void Cylinder::show()
+void Cylinder::show(int argc, char **argv)
 {
+    QEventLoop loop;
+
+    QSurfaceFormat::setDefaultFormat(QVTKOpenGLNativeWidget::defaultFormat());
+
+    QVTKOpenGLNativeWidget widget;
+
     vtkNew<vtkNamedColors> colors;
+
+    vtkNew<vtkGenericOpenGLRenderWindow> renderWindow;
+#if VTK890
+    widget.setRenderWindow(renderWindow);
+#else
+    widget.SetRenderWindow(renderWindow);
+#endif
+
+    widget.resize(600, 600);
 
     // Set the background color.
     std::array<unsigned char, 4> bkg{{26, 51, 102, 255}};
@@ -56,20 +83,15 @@ void Cylinder::show()
     renderer->ResetCamera();
     renderer->GetActiveCamera()->Zoom(1.5);
 
-    // The render window is the actual GUI window
-    // that appears on the computer screen
-    vtkNew<vtkRenderWindow> renderWindow;
-    renderWindow->SetSize(300, 300);
-    renderWindow->AddRenderer(renderer);
-    renderWindow->SetWindowName("Cylinder");
+#if VTK890
+    widget.renderWindow()->AddRenderer(renderer);
+    widget.renderWindow()->SetWindowName("RenderWindowNoUIFile");
+#else
+    widget.GetRenderWindow()->AddRenderer(renderer);
+    widget.GetRenderWindow()->SetWindowName("RenderWindowNoUIFile");
+#endif
+    widget.show();
+    loop.exec();
 
-    // The render window interactor captures mouse events
-    // and will perform appropriate camera or actor manipulation
-    // depending on the nature of the events.
-    vtkNew<vtkRenderWindowInteractor> renderWindowInteractor;
-    renderWindowInteractor->SetRenderWindow(renderWindow);
-
-    // This starts the event loop and as a side effect causes an initial render.
-    renderWindow->Render();
-    renderWindowInteractor->Start();
+    std::cout << "end" << std::endl;
 }

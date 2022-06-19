@@ -16,6 +16,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::onPushbuttonClicked()
 {
-    Cylinder c;
-    c.show();
+    Cylinder *c = new Cylinder;
+    c->show(0, NULL);
 }
