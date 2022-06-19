@@ -19,7 +19,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void onPushbuttonClicked();
+    void onCylinderClicked();
 
 private:
     Ui::MainWindow *ui;

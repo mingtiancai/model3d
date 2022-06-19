@@ -29,7 +29,7 @@ Cylinder::Cylinder()
 {
 }
 
-void Cylinder::show(int argc, char **argv)
+void Cylinder::show()
 {
     QEventLoop loop;
 

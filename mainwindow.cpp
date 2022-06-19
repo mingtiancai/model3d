@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::onPushbuttonClicked);
+    connect(ui->actionCylinder, &QAction::triggered, this, &MainWindow::onCylinderClicked);
 }
 
 MainWindow::~MainWindow()
@@ -14,8 +14,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::onPushbuttonClicked()
+void MainWindow::onCylinderClicked()
 {
     Cylinder *c = new Cylinder;
-    c->show(0, NULL);
+    c->show();
 }
