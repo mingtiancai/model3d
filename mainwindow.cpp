@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "cylinder/cylinder.h"
+#include "simpleOperation/form.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -16,6 +17,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::onCylinderClicked()
 {
-    Cylinder *c = new Cylinder;
-    c->show();
+    // Cylinder *c = new Cylinder;
+    // c->show();
+    QEventLoop loop;
+    Form f;
+    f.show();
+    loop.exec();
 }

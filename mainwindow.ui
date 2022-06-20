@@ -42,6 +42,7 @@
       <string>Tutorial</string>
      </property>
      <addaction name="actionCylinder"/>
+     <addaction name="actionSimpleOperation"/>
     </widget>
     <addaction name="menuTutorial"/>
    </widget>
@@ -53,6 +54,11 @@
   <action name="actionCylinder">
    <property name="text">
     <string>Cylinder</string>
+   </property>
+  </action>
+  <action name="actionSimpleOperation">
+   <property name="text">
+    <string>SimpleOperation</string>
    </property>
   </action>
  </widget>

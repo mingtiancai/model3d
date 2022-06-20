@@ -50,6 +50,7 @@ endif()
 
 target_link_libraries(model3d PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${VTK_LIBRARIES}
     cylinder
+    simpleOperation
 )
 
 set_target_properties(model3d PROPERTIES
@@ -65,3 +66,4 @@ if(QT_VERSION_MAJOR EQUAL 6)
 endif()
 
 add_subdirectory(cylinder)
+add_subdirectory(simpleOperation)
